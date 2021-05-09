@@ -1,6 +1,6 @@
 
 /**
- * @author Jane Smith <jsmith@example.com>
+ * @author Ayush Goel <goel97ayush@gmail.com>
  * @version v2.0.0
  * 
  */
