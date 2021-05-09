@@ -8,7 +8,7 @@ It uses a Free fake API for testing and prototyping.
 More details about the API to which we are sending the request can be find here
  https://jsonplaceholder.typicode.com/
 
-* easyHTTP.js
+* easyHTTP.js v1.0.0
 
 1. Uses ES5 AJAX and xmlHttpRequest.
 2. Prototypes provide the interface to this library to perform GET, PUT, POST, DELETE operation
