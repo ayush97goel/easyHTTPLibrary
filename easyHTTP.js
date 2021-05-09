@@ -1,60 +1,63 @@
-function easyHttp() {
-  this.http = new XMLHttpRequest();
-}
 
-// GET METHOD
-easyHttp.prototype.get = function (url, callback) {
-  this.http.open('GET', url, true);
-  let self = this;
+/**
+ * @author Ayush Goel <goel97ayush@gmail.com>
+ * @version v2.0.0
+ * 
+ */
 
-  this.http.onload = function () {
-    if (self.http.status === 200) {
-      callback(null, self.http.responseText);
-    } else {
-      callback('Error : ' + self.http.status);
-    }
+class EasyHTTP {
+  // GET POSTS
+  get(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(res => res.json())
+        .then(jsonData => resolve(jsonData))
+        .catch(error => reject(error));
+    })
   }
 
-  this.http.send();
-}
-// POST METHOD
-easyHttp.prototype.post = function (url, data, callback) {
-  this.http.open('POST', url, true);
-  this.http.setRequestHeader('Content-type', 'application/json');
-  let self = this;
-
-  this.http.onload = function () {
-    callback(null, self.http.responseText);
+  // ADD NEW POST
+  post(url, data) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.json())
+        .then(jsonData => resolve(jsonData))
+        .catch(error => reject(error));
+    });
   }
 
-  this.http.send(JSON.stringify(data));
-}
-
-// PUT METHOD
-easyHttp.prototype.put = function (url, data, callback) {
-  this.http.open('PUT', url, true);
-  this.http.setRequestHeader('Content-type', 'application/json');
-  let self = this;
-
-  this.http.onload = function () {
-    callback(null, self.http.responseText);
+  // UPDATE SPECIFIC POST
+  put(url, data) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.json())
+        .then(jsonData => resolve(jsonData))
+    })
+      .catch(error => reject(error))
   }
 
-  this.http.send(JSON.stringify(data));
-}
-
-// DELETE METHOD
-easyHttp.prototype.delete = function (url, callback) {
-  this.http.open('DELETE', url, true);
-  let self = this;
-
-  this.http.onload = function () {
-    if (self.http.status === 200) {
-      callback(null, "POST DELETED!!");
-    } else {
-      callback('Error : ' + self.http.status);
-    }
+  // DELETE SPECIFIC POST
+  delete(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'DELETE'
+      })
+        .then(res => res.text())
+        .then(() => resolve("Post Deleted!!!"))
+        .catch(error => reject(error));
+    })
   }
 
-  this.http.send();
 }
